@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "axios": "^1.7.7",
+    "child_process": "^1.0.2",
+    "colors": "^1.4.0",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security",
+    "https-proxy-agent": "^7.0.5",
+    "luxon": "^3.5.0",
+    "minimist": "^1.2.8",
+    "os": "^0.1.2",
+    "querystring": "^0.2.1"
+  }
+}
