@@ -1,4 +1,6 @@
 require('dotenv').config();
+const express = require('express')
+const app = express()
 const axios = require('axios');
 const { parse } = require('querystring');
 const { execSync } = require('child_process');
@@ -7,6 +9,12 @@ const os = require('os');
 const colors = require('colors');
 const { DateTime } = require('luxon');
 const { env } = require('process');
+app.get('/ping', (req, res) => {
+    res.send('Match Quest pong!')
+});
+app.listen("3000", () => {
+    console.log(`Example app listening on port ${3000}`)
+})
 
 const headers = {
     "host": "tgapp-api.matchain.io",
