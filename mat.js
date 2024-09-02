@@ -320,7 +320,7 @@ class Matchain {
         const hours = String(Math.floor(t / 3600)).padStart(2, '0');
         const minutes = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
         const seconds = String(t % 60).padStart(2, '0');
-        console.log(`[*] Đếm ngược chờ: ${hours}:${minutes}:${seconds}     \r`.gray);
+        console.log(`[*] Đếm ngược chờ: ${hours}:${minutes}:${seconds}     \r`.yellow);
         while (t) {
             await new Promise(resolve => setTimeout(resolve, 1000));
             t -= 1;
