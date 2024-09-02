@@ -317,15 +317,15 @@ class Matchain {
     }
 
     async countdown(t) {
+        const hours = String(Math.floor(t / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
+        const seconds = String(t % 60).padStart(2, '0');
+        process.stdout.write(`[*] Đếm ngược chờ: ${hours}:${minutes}:${seconds}     \r`.gray);
         while (t) {
-            const hours = String(Math.floor(t / 3600)).padStart(2, '0');
-            const minutes = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
-            const seconds = String(t % 60).padStart(2, '0');
-            process.stdout.write(`[*] Chờ ${hours}:${minutes}:${seconds}     \r`.gray);
             await new Promise(resolve => setTimeout(resolve, 1000));
             t -= 1;
         }
-        process.stdout.write('\r');
+        process.stdout.write('Chờ xong. Thoát khỏi countdown\r');
     }
 }
 
