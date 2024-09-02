@@ -8,7 +8,6 @@ const fs = require('fs');
 const os = require('os');
 const colors = require('colors');
 const { DateTime } = require('luxon');
-const { env } = require('process');
 app.get('/ping', (req, res) => {
     res.send('Match Quest pong!')
 });
@@ -193,7 +192,8 @@ class Matchain {
     
 
     load_data(file) {
-        if (process.env.QUERY_ID) return process.env.QUERY_ID.split('\n')
+        const queryId = process.env.QUERY_ID;
+        if (queryId) return queryId.split('\n')
             .map(line => line.trim())
             .filter(line => line !== '');
         const data = fs.readFileSync(file, 'utf-8')
