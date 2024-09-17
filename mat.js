@@ -17,6 +17,10 @@ app.listen("3000", () => {
     console.log(`Example app listening on port ${3000}`)
 })
 
+const httpsAgent = new https.Agent({
+    rejectUnauthorized: false
+});
+
 const headers = {
     "host": "tgapp-api.matchain.io",
     "connection": "keep-alive",
