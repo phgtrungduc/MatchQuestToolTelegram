@@ -1,6 +1,3 @@
-require('dotenv').config();
-const express = require('express')
-const app = express()
 const axios = require('axios');
 const https = require('https');
 const { parse } = require('querystring');
@@ -10,12 +7,6 @@ const os = require('os');
 const colors = require('colors');
 const { DateTime } = require('luxon');
 const minimist = require('minimist');
-app.get('/ping', (req, res) => {
-    res.send('Match Quest pong!')
-});
-app.listen("3000", () => {
-    console.log(`Example app listening on port ${3000}`)
-})
 
 const headers = {
     "host": "tgapp-api.matchain.io",
@@ -277,10 +268,6 @@ class Matchain {
     }
     
     load_data(file) {
-        const queryId = process.env.QUERY_ID;
-        if (queryId) return queryId.split('\n')
-            .map(line => line.trim())
-            .filter(line => line !== '');
         const data = fs.readFileSync(file, 'utf-8')
             .split('\n')
             .map(line => line.trim())
@@ -496,15 +483,15 @@ class Matchain {
     }
 
     async countdown(t) {
-        const hours = String(Math.floor(t / 3600)).padStart(2, '0');
-        const minutes = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
-        const seconds = String(t % 60).padStart(2, '0');
-        console.log(`[*] Đếm ngược chờ: ${hours}:${minutes}:${seconds}     \r`.yellow);
         while (t) {
+            const hours = String(Math.floor(t / 3600)).padStart(2, '0');
+            const minutes = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
+            const seconds = String(t % 60).padStart(2, '0');
+            process.stdout.write(`[*] Chờ ${hours}:${minutes}:${seconds}     \r`.gray);
             await new Promise(resolve => setTimeout(resolve, 1000));
             t -= 1;
         }
-        console.log('Chờ xong. Thoát khỏi countdown\r');
+        process.stdout.write('\r');
     }
 }
 
