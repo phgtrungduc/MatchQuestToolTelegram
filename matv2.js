@@ -8,6 +8,17 @@ const os = require('os');
 const colors = require('colors');
 const { DateTime } = require('luxon');
 const minimist = require('minimist');
+const express = require('express')
+const app = express()
+
+app.get('/ping', (req, res) => {
+    res.send('Match Quest pong!')
+});
+app.listen("3215", () => {
+    console.log(`Example app listening on port ${3215}`)
+})
+
+
 
 const headers = {
     "host": "tgapp-api.matchain.io",
