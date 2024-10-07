@@ -13,8 +13,8 @@ const minimist = require('minimist');
 app.get('/ping', (req, res) => {
     res.send('Match Quest pong!')
 });
-app.listen("3000", () => {
-    console.log(`Example app listening on port ${3000}`)
+app.listen("3215", () => {
+    console.log(`Example app listening on port ${3215}`)
 })
 
 const httpsAgent = new https.Agent({
@@ -166,12 +166,12 @@ class Matchain {
         const balance = res.data.data;
         this.log(`Balance: ${balance / 1000}`, 'info');
         
-        const quizResult = await this.completeQuiz();
-        if (quizResult) {
-            this.log('Hoàn thành quiz hàng ngày', 'success');
-        } else {
-            this.log('Không thể hoàn thành quiz hàng ngày', 'warning');
-        }
+        // const quizResult = await this.completeQuiz();
+        // if (quizResult) {
+        //     this.log('Hoàn thành quiz hàng ngày', 'success');
+        // } else {
+        //     this.log('Không thể hoàn thành quiz hàng ngày', 'warning');
+        // }
         
         const taskStatus = await this.checkDailyTaskStatus();
         if (taskStatus) {
@@ -500,15 +500,17 @@ class Matchain {
     }
 
     async countdown(t) {
+        const timeStamp = new Date();
         const hours = String(Math.floor(t / 3600)).padStart(2, '0');
         const minutes = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
         const seconds = String(t % 60).padStart(2, '0');
-        console.log(`[*] Đếm ngược chờ: ${hours}:${minutes}:${seconds}     \r`.yellow);
+        console.log(`[${timeStamp}] [*] Đếm ngược chờ: ${hours}:${minutes}:${seconds}     \r`.yellow);
         while (t) {
             await new Promise(resolve => setTimeout(resolve, 1000));
             t -= 1;
         }
-        console.log('Chờ xong. Thoát khỏi countdown\r');
+        const timeStamp2 = new Date();
+        console.log(`[${timeStamp2}]Chờ xong. Thoát khỏi countdown\r`);
     }
 }
 

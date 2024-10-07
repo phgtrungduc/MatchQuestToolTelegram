@@ -1,3 +1,4 @@
+require('dotenv').config();
 const axios = require('axios');
 const https = require('https');
 const { parse } = require('querystring');
@@ -153,12 +154,12 @@ class Matchain {
         const balance = res.data.data;
         this.log(`Balance: ${balance / 1000}`, 'info');
         
-        const quizResult = await this.completeQuiz();
-        if (quizResult) {
-            this.log('Hoàn thành quiz hàng ngày', 'success');
-        } else {
-            this.log('Không thể hoàn thành quiz hàng ngày', 'warning');
-        }
+        // const quizResult = await this.completeQuiz();
+        // if (quizResult) {
+        //     this.log('Hoàn thành quiz hàng ngày', 'success');
+        // } else {
+        //     this.log('Không thể hoàn thành quiz hàng ngày', 'warning');
+        // }
         
         const taskStatus = await this.checkDailyTaskStatus();
         if (taskStatus) {
@@ -268,7 +269,8 @@ class Matchain {
     }
     
     load_data(file) {
-        const data = fs.readFileSync(file, 'utf-8')
+        const queryId = process.env.QUERY_ID;
+        const data = queryId
             .split('\n')
             .map(line => line.trim())
             .filter(line => line !== '');
